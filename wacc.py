@@ -1,4 +1,5 @@
 import yfinance as yf
+import functions
 
 stock = yf.Ticker("VBBR3.SA")
 
@@ -24,15 +25,6 @@ def get_most_recent_value(data, metric_name):
         return data.loc[metric_name].iloc[0]
     return None
 
-interest_expense = get_most_recent_value(income_statement, "Interest Expense")
-
-total_debt = get_most_recent_value(balance_sheet, "Total Debt")
-
-income_tax_expense = get_most_recent_value(income_statement, "Tax Provision")
-
-income_before_tax = get_most_recent_value(income_statement, "Pretax Income")
-
-
 def calculate_cost_of_debt(interest_expense, total_debt):
     kd = (interest_expense / total_debt) * 100
     return kd
@@ -45,9 +37,17 @@ def cost_of_debt_after_tax (cost_of_debt, tax_rate):
     calculate_cost_of_debt = cost_of_debt * (1 - tax_rate / 100)
     return calculate_cost_of_debt
 
+interest_expense = get_most_recent_value(income_statement, "Interest Expense")
+
+total_debt = get_most_recent_value(balance_sheet, "Total Debt")
+
+income_tax_expense = get_most_recent_value(income_statement, "Tax Provision")
+
+income_before_tax = get_most_recent_value(income_statement, "Pretax Income")
+
 cost_of_debt = calculate_cost_of_debt(interest_expense, total_debt)
 
-tax_rate = effective_tax_rate(income_tax_expense, income_before_tax)
+tax_rate = functions.effective_tax_rate(income_tax_expense, income_before_tax)
 
 cost_of_debt = cost_of_debt_after_tax(cost_of_debt, tax_rate)
 
