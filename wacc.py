@@ -16,14 +16,17 @@ cost_of_equity = calculate_cost_of_equity(risk_free_asset, beta, market_return)
 
 print(f"Cost of Equity: {cost_of_equity:.2f}%")
 
+income_statement = stock.financials
+balance_sheet = stock.balance_sheet
 
-def interest_expense():
-    income_statement = stock.financials
+def get_most_recent_value(data, metric_name):
+    if metric_name in data.index:
+        return data.loc[metric_name].iloc[0]
+    return None
 
-    if "Interest Expense" in income_statement.index:
-        interest_expense_recent = income_statement.loc["Interest Expense"].iloc[0]
-        recent_year = income_statement.columns[0].strftime("%Y") 
-        return interest_expense_recent
-    else:
-        print("Interest Expense não encontrado na demonstração de resultados.")
+interest_expense = get_most_recent_value(income_statement, "Interest Expense")
+
+total_debt = get_most_recent_value(balance_sheet, "Total Debt")
+
+
 
