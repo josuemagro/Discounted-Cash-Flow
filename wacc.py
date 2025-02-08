@@ -33,6 +33,12 @@ income_tax_expense = get_most_recent_value(income_statement, "Tax Provision")
 income_before_tax = get_most_recent_value(income_statement, "Pretax Income")
 
 
+def calculate_cost_of_debt(interest_expense, total_debt):
+    kd = (interest_expense / total_debt) * 100
+    return kd
+
+cost_of_debt = calculate_cost_of_debt(interest_expense, total_debt)
+
 
 
 
