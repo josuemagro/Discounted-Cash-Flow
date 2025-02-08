@@ -9,11 +9,7 @@ market_return = 0.114
 
 beta = stock.info.get("beta")
 
-def calculate_cost_of_equity(risk_free_asset, beta, market_return):
-    ke = (risk_free_asset + beta * (market_return - risk_free_asset)) * 100
-    return ke
-
-cost_of_equity = calculate_cost_of_equity(risk_free_asset, beta, market_return)
+cost_of_equity = functions.calculate_cost_of_equity(risk_free_asset, beta, market_return)
 
 print(f"Cost of Equity: {cost_of_equity:.2f}%")
 
@@ -32,9 +28,9 @@ cost_of_debt = functions.calculate_cost_of_debt(interest_expense, total_debt)
 
 tax_rate = functions.effective_tax_rate(income_tax_expense, income_before_tax)
 
-cost_of_debt = functions.cost_of_debt_after_tax(cost_of_debt, tax_rate)
+cost_of_debt_after_tax = functions.cost_of_debt_after_tax(cost_of_debt, tax_rate)
 
-print(f"{cost_of_debt:.2f}%")
+print(f"Cost of Debt after Tax: {cost_of_debt_after_tax:.2f}%")
 
 
 
