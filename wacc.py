@@ -28,5 +28,8 @@ interest_expense = get_most_recent_value(income_statement, "Interest Expense")
 
 total_debt = get_most_recent_value(balance_sheet, "Total Debt")
 
+income_tax_expense = get_most_recent_value(income_statement, "Tax Provision")
+
+
 
 
