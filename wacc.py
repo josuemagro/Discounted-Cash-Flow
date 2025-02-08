@@ -3,18 +3,17 @@ import functions
 
 stock = yf.Ticker("VBBR3.SA")
 
-risk_free_asset = 0.1325
+risk_free_asset = 0.1325 #Edit This
 
-market_return = 0.114
+market_return = 0.114 #Edit This
+
+
+income_statement = stock.financials
+balance_sheet = stock.balance_sheet
 
 beta = stock.info.get("beta")
 
 cost_of_equity = functions.calculate_cost_of_equity(risk_free_asset, beta, market_return)
-
-print(f"Cost of Equity: {cost_of_equity:.2f}%")
-
-income_statement = stock.financials
-balance_sheet = stock.balance_sheet
 
 interest_expense = functions.get_most_recent_value(income_statement, "Interest Expense")
 
@@ -30,7 +29,13 @@ tax_rate = functions.effective_tax_rate(income_tax_expense, income_before_tax)
 
 cost_of_debt_after_tax = functions.cost_of_debt_after_tax(cost_of_debt, tax_rate)
 
+total_debt = functions.get_most_recent_value(balance_sheet, "Total Debt")
+
+
+print(f"Cost of Equity: {cost_of_equity:.2f}%")
+
 print(f"Cost of Debt after Tax: {cost_of_debt_after_tax:.2f}%")
 
+print(f"Total Debt: {total_debt}")
 
 
