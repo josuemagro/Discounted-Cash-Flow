@@ -37,9 +37,21 @@ def calculate_cost_of_debt(interest_expense, total_debt):
     kd = (interest_expense / total_debt) * 100
     return kd
 
+def effective_tax_rate(income_tax_expense, income_before_tax):
+    tax_rate = (income_tax_expense / income_before_tax) * 100
+    return tax_rate
+
+def cost_of_debt_after_tax (cost_of_debt, tax_rate):
+    calculate_cost_of_debt = cost_of_debt * (1 - tax_rate / 100)
+    return calculate_cost_of_debt
+
 cost_of_debt = calculate_cost_of_debt(interest_expense, total_debt)
 
+tax_rate = effective_tax_rate(income_tax_expense, income_before_tax)
 
+cost_of_debt = cost_of_debt_after_tax(cost_of_debt, tax_rate)
+
+print(f"{cost_of_debt:.2f}%")
 
 
 
